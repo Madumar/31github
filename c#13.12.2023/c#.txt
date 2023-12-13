@@ -1,0 +1,55 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("Let's play Rock-Paper-Scissors!");
+            Console.WriteLine("Choose: rock, paper, or scissors (or 'exit' to quit)");
+
+            string userChoice = Console.ReadLine().ToLower();
+            if (userChoice == "exit")
+            {
+                break;
+            }
+
+            Random random = new Random();
+            int computerChoice = random.Next(1, 4); // 1 for rock, 2 for paper, 3 for scissors
+
+            string computerChoiceString = "";
+            switch (computerChoice)
+            {
+                case 1:
+                    computerChoiceString = "rock";
+                    break;
+                case 2:
+                    computerChoiceString = "paper";
+                    break;
+                case 3:
+                    computerChoiceString = "scissors";
+                    break;
+            }
+
+            Console.WriteLine($"Computer chose: {computerChoiceString}");
+
+            if (userChoice == computerChoiceString)
+            {
+                Console.WriteLine("It's a tie!");
+            }
+            else if ((userChoice == "rock" && computerChoiceString == "scissors") ||
+                     (userChoice == "paper" && computerChoiceString == "rock") ||
+                     (userChoice == "scissors" && computerChoiceString == "paper"))
+            {
+                Console.WriteLine("You win!");
+            }
+            else
+            {
+                Console.WriteLine("Computer wins!");
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
