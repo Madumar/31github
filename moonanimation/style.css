@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .sky {
+    background-color: #000;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .moon {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    animation: moonMove 10s linear infinite alternate;
+  }
+  
+  .stars {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://via.placeholder.com/10x10.png?text=.');
+    position: absolute;
+    animation: starsTwinkle 3s linear infinite;
+  }
+  
+  @keyframes moonMove {
+    from {
+      transform: translateX(0px) scale(1);
+      box-shadow: 0 0 20px 10px #f1f1f1;
+    }
+    to {
+      transform: translateX(500px) scale(1.1);
+      box-shadow: 0 0 20px 10px #f1f1f1;
+    }
+  }
+  
+  @keyframes starsTwinkle {
+    0% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+  
