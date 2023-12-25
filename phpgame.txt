@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guessing Game</title>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  
+  <?php
+  session_start();
+
+  if (!isset($_SESSION['number'])) {
+    $_SESSION['number'] = rand(1, 100);
+    $_SESSION['attempts'] = 0;
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $guess = $_POST['guess'];
+    $_SESSION['attempts']++;
+
+    if ($guess < $_SESSION['number']) {
+      echo "<p>Your guess ($guess) is too low. Try again!</p>";
+    } elseif ($guess > $_SESSION['number']) {
+      echo "<p>Your guess ($guess) is too high. Try again!</p>";
+    } else {
+      echo "<p>Congratulations! You guessed the correct number ($_SESSION[number]) in $_SESSION[attempts] attempts.</p>";
+      session_destroy();
+    }
+  }
+  ?>
+
+  <form method="post">
+    <label for="guess">Enter your guess (between 1 and 100):</label>
+    <input type="number" id="guess" name="guess" min="1" max="100" required>
+    <button type="submit">Submit Guess</button>
+  </form>
+</body>
+</html>
