@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do List</title>
+    <script>
+        function fetchTasks() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("taskList").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "get_tasks.php", true);
+            xmlhttp.send();
+        }
+
+        function addTask() {
+            var task = document.getElementById("taskInput").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    fetchTasks();
+                }
+            };
+            xmlhttp.open("GET", "add_task.php?task=" + task, true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body onload="fetchTasks()">
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+    <div id="taskList"></div>
+</body>
+</html>
