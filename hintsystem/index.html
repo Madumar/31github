@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hint System</title>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("hint").innerHTML = "";
+                return;
+            } else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("hint").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "get_hint.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Hint System</h2>
+    <p>Type a name in the input field below:</p>
+    <form>
+        <input type="text" onkeyup="showHint(this.value)">
+    </form>
+    <p>Suggestions: <span id="hint"></span></p>
+
+</body>
+</html>
