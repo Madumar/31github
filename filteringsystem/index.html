@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtering System</title>
+    <script>
+        function filterItems() {
+            var category = document.getElementById("category").value;
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("itemList").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET", "filter_items.php?category=" + category, true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Filtering System</h2>
+    <label for="category">Filter by Category:</label>
+    <input type="text" id="category" placeholder="Enter category">
+    <button onclick="filterItems()">Filter</button>
+
+    <div id="itemList">
+        
+    </div>
+</body>
+</html>
